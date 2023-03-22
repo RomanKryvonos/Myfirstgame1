@@ -1,0 +1,49 @@
+import pygame
+import button
+from pygame import *
+from pygame.locals import *
+
+Width = 810
+Height = 520
+
+bg_s = (Height, Width)
+
+screen = pygame.display.set_mode((Width, Height), RESIZABLE)
+current_size = screen.get_size()
+virtual_surface = Surface((Width, Height))
+FPS = 15
+clock = pygame.time.Clock()
+pygame.display.set_caption("My game")
+icon = pygame.image.load("images/icon.png")
+pygame.display.set_icon(icon)
+
+bg = pygame.image.load("images/bg.jpg")
+bg = pygame.transform.scale(bg, bg_s)
+
+start_img = pygame.image.load('images/start_btn.png').convert_alpha()
+exit_img = pygame.image.load('images/exit_btn.png').convert_alpha()
+
+start_button = button.Button(100, 200, start_img, 0.8)
+exit_button = button.Button(450, 200, exit_img, 0.8)
+
+run = True
+while run:
+
+	screen.fill((192, 192, 192))
+
+	if start_button.draw(screen):
+		print('START')
+	if exit_button.draw(screen):
+		print('EXIT')
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			run = False
+		elif event.type == VIDEORESIZE:
+			current_size = event.size
+			scaled_surface = transform.scale(virtual_surface, current_size)
+			screen.blit(scaled_surface, (0, 0))
+
+	pygame.display.update()
+
+pygame.quit()

@@ -1,0 +1,61 @@
+import pygame
+import gamma
+from pygame import *
+from pygame.locals import *
+
+pygame.init()
+
+Width = 810
+Height = 520
+
+bg_s = (Width, Height)
+
+screen = pygame.display.set_mode((Width, Height), RESIZABLE)
+current_size = screen.get_size()
+virtual_surface = Surface((Width, Height))
+FPS = 15
+clock = pygame.time.Clock()
+pygame.display.set_caption("My game")
+icon = pygame.image.load("images/icon.png")
+pygame.display.set_icon(icon)
+
+start = pygame.image.load("images/start.png")
+start = pygame.transform.scale(start, (250, 85))
+bg = pygame.image.load("images/bg.jpg")
+bg = pygame.transform.scale(bg, (bg_s))
+
+bg_song = pygame.mixer.Sound("songs/song_menu.mp3")
+bg_song.play()
+
+class MenuScene(gamma.Scene):
+    def init(self):
+        pass
+
+    def onEnter(self):
+        pass
+
+    def onExit(self):
+        pass
+
+    def update(self):
+        pass
+    def draw(self):
+        pass
+
+running = True
+while running:
+    clock.tick(FPS)
+
+    virtual_surface.blit(bg, (0, 0))
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == VIDEORESIZE:
+            current_size = event.size
+    scaled_surface = transform.scale(virtual_surface, current_size)
+    screen.blit(scaled_surface, (0, 0))
+
+    pygame.display.flip()
+
+quit()
